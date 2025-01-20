@@ -1,0 +1,111 @@
+KI P4 
+
+1/ 
+PREFIX : <https://www.themoviedb.org/kaggle-export/>
+SELECT DISTINCT ?o
+WHERE {
+  ?m a :Movie ;
+    :genres ?g .
+  ?g :name ?o .
+  
+}
+
+2/ 
+
+PREFIX : <https://www.themoviedb.org/kaggle-export/>
+SELECT DISTINCT ?department
+WHERE {
+  ?c a :Crew ;
+     :department ?department .
+}
+
+3/ 
+
+PREFIX : <https://www.themoviedb.org/kaggle-export/>
+SELECT (COUNT(DISTINCT ?c) AS ?total_c)
+WHERE {
+  ?c a :Company .
+}
+
+4/
+
+PREFIX : <https://www.themoviedb.org/kaggle-export/>
+SELECT ?c
+WHERE {
+   ?b a :Collection ;
+   :name ?c .
+  
+}
+
+5/
+
+PREFIX : <https://www.themoviedb.org/kaggle-export/>
+SELECT ?title
+WHERE {
+  ?m a :Movie ;
+     :title ?title ;
+     :original_language "de" .
+}
+
+6/ 
+
+PREFIX : <https://www.themoviedb.org/kaggle-export/>
+SELECT ?title
+WHERE {
+  ?m a :Movie ;
+     :title ?title ;
+     :cast ?cast .
+  ?cast :name ?name .
+  FILTER CONTAINS(?name, "julius cäsar")
+}
+
+7/ 
+
+PREFIX : <https://www.themoviedb.org/kaggle-export/>
+SELECT DISTINCT ?name
+WHERE {
+  ?cast a :Cast ;
+        :name ?name .
+
+  ?crew a :Crew ;
+        :name ?name ;
+        :job "Director" .
+}
+
+8/ 
+
+
+PREFIX : <https://www.themoviedb.org/kaggle-export/>
+SELECT DISTINCT ?roll
+WHERE {
+  ?m a :Movie ;
+  	:cast ?c .
+       ?c :name "Johnny Depp" ;
+        :character ?roll .
+}
+
+9/ 
+
+PREFIX : <https://www.themoviedb.org/kaggle-export/>
+SELECT ?property ?value
+WHERE {
+  ?m a :Movie ;
+     :title "Titanic" ;
+     ?property ?value .
+}
+
+10/
+
+PREFIX : <https://www.themoviedb.org/kaggle-export/>
+SELECT ?title ?popularity
+WHERE {
+  ?movie a :Movie ;
+         :title ?title ;
+         :popularity ?popularity .
+}
+ORDER BY DESC(?popularity)
+LIMIT 20
+
+
+
+
